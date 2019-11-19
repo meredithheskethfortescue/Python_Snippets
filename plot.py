@@ -9,9 +9,10 @@ def plot_quiver(img):
     __, height, width = np.shape(img)
     x = list(range(width))
     y = list(reversed(range(height)))
+    # y = list(range(height))
 
     fig, ax = plt.subplots()
-    ax.quiver(x, y, img[0], img[1])
+    ax.quiver(x, y, img[1], -img[0])
     plt.show()
 
 
@@ -49,17 +50,24 @@ if __name__ == '__main__':
     scope = np.pi
     samples = 31
 
+    # create data
     wavelet_1d = np.cos(np.linspace(-scope, scope, samples))
     cone = cone(scope, samples)
-    wavelet_2d = np.cos(cone)
+    wavelet_2d = np.cos(cone)  # cos(r) if -pi <= r <= pi
+    wavelet_2d[cone > np.pi] = -1  # 0 else
 
+    # line plot
     plt.plot(wavelet_1d)
     plt.show()
 
-    plt.imshow(wavelet_2d)
+    # image plot
+    plt.imshow(wavelet_2d, cmap='nipy_spectral')
     plt.show()
 
+    # plot as 3D wireframe
     plot_wireframe(wavelet_2d)
 
+    # quiver plot of a vectorfield
     grad = np.gradient(wavelet_2d)
+    print(grad)
     plot_quiver(grad)
