@@ -54,7 +54,7 @@ if __name__ == '__main__':
     wavelet_1d = np.cos(np.linspace(-scope, scope, samples))
     cone = cone(scope, samples)
     wavelet_2d = np.cos(cone)  # cos(r) if -pi <= r <= pi
-    wavelet_2d[cone > np.pi] = -1  # 0 else
+    wavelet_2d[cone > np.pi] = -1  # -1 else
 
     # line plot
     plt.plot(wavelet_1d)
