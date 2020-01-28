@@ -37,7 +37,8 @@ if __name__ == '__main__':
             return np.sin(x) / x
 
 
-    img = my_function(cone_mesh(9*np.pi, 1000))
+    img = my_function(cone_mesh(4*np.pi, 1001))
 
-    plt.imshow(img)
+    v_minmax = np.amax(np.abs(img))  # scale heatmap to have zero in center
+    plt.imshow(img, cmap='RdBu_r', vmin=-v_minmax, vmax=v_minmax)  # plot heatmap with white as zero
     plt.show()
