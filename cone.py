@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import numpy as np
-import matplotlib.pyplot as plt
-import timeit
 
 
 def cone_complex(scope, samples):
@@ -23,3 +21,23 @@ def cone_mesh(scope, samples):
     t_squared = np.linspace(-scope, scope, samples) ** 2  # squared linear progression
     mesh = np.meshgrid(t_squared, t_squared)  # build mesh of squared pairs
     return np.sqrt(np.sum(mesh, axis=0))  # get euclidean distance with the square root of the pair's sum
+
+
+if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+
+    @np.vectorize
+    def my_function(x):
+        '''The numpy.vectorize decorator makes the function applicable to an ndarray.
+        Otherwise it would throw a Value Error that The truth value of an array with more than one element is ambiguous.
+        '''
+        if x == 0:
+            return 1
+        else:
+            return np.sin(x) / x
+
+
+    img = my_function(cone_mesh(9*np.pi, 1000))
+
+    plt.imshow(img)
+    plt.show()
