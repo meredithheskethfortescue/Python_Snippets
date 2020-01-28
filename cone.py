@@ -22,4 +22,4 @@ def cone_mesh(scope, samples):
     '''This naive solution builds a mesh of paired values and calculates the euclidean distance'''
     t_squared = np.linspace(-scope, scope, samples) ** 2  # squared linear progression
     mesh = np.meshgrid(t_squared, t_squared)  # build mesh of squared pairs
-    return np.sqrt(np.sum(mesh, axis=0))  # get euclidean distance with the squareroot of the pair's sum
+    return np.sqrt(np.sum(mesh, axis=0))  # get euclidean distance with the square root of the pair's sum
