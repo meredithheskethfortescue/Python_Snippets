@@ -12,10 +12,11 @@ def my_filter_wrapper(img: np.ndarray, kernel_width: int, nop: int = 0) -> np.nd
 
     img = np.array(img, dtype=np.float32)
 
+    idx_center = (kernel_width**2) // 2
+
     def kernel_function(subset):
         """Kernel function that is applied to each pixel"""
-        centerpoint = subset[np.size(subset) // 2]  # get central pixel of the windowed subset
-        if centerpoint == nop:
+        if subset[idx_center] == nop:
             # current pixel marked as NOP
             return 0
         else:
