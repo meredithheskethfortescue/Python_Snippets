@@ -2,7 +2,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D  # see plot_wireframe
+
+plt.rcParams['text.usetex'] = True  # LaTeX rendering support
 
 
 def plot_quiver(img):
@@ -22,6 +24,8 @@ def plot_wireframe(two_dim_array, show=True):
     :param show: If True open up window directly
     :return: Matplotlib surface plot
     """
+    # Keep in mind the need of additional import:
+    # from mpl_toolkits.mplot3d import Axes3D
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ny, nx = two_dim_array.shape
