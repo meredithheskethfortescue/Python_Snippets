@@ -38,6 +38,14 @@ def plot_wireframe(two_dim_array, show=True):
     return surf
 
 
+def plot_polar(r, phi):
+    fig = plt.figure(tight_layout=True)
+    ax = fig.add_subplot(111, projection='polar')
+    ax.plot(phi, r)
+    ax.grid(label='size')
+    plt.show()
+
+
 def cone(scope, samples):
     t_squared = np.linspace(-scope, scope, samples) ** 2
     line_2d = np.empty((samples, samples))
@@ -51,10 +59,9 @@ def morlet(t, f):
 
 
 if __name__ == '__main__':
+    # create data
     scope = np.pi
     samples = 31
-
-    # create data
     wavelet_1d = np.cos(np.linspace(-scope, scope, samples))
     cone = cone(scope, samples)
     wavelet_2d = np.cos(cone)  # cos(r) if -pi <= r <= pi
@@ -75,3 +82,8 @@ if __name__ == '__main__':
     grad = np.gradient(wavelet_2d)
     print(grad)
     plot_quiver(grad)
+
+    # Lambert in polar coordinate system
+    xn = np.linspace(0, 2 * np.pi, 360)
+    yn = np.cos(xn) / 2 + 0.5
+    plot_polar(yn, xn)
