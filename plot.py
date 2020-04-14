@@ -58,6 +58,35 @@ def morlet(t, f):
     return np.cos(2 * np.pi * f * t) * np.exp(- t ** 2 / (2 * s ** 2))
 
 
+def maximize_window():
+    """Maximize a matplotlib plot window when shown"""
+    backend = plt.get_backend()
+    figure_manager = plt.get_current_fig_manager()
+
+    if backend == 'TkAgg':
+        import platform
+        operating_system = platform.system()
+
+        if operating_system in ('Linux', 'Darwin'):  # Darwin is for Mac
+            figure_manager.resize(*figure_manager.window.maxsize())
+        elif operating_system == 'Windows':
+            figure_manager.window.state('zoomed')
+        else:
+            import warnings
+            warnings.warn("Unknown operating system:" + str(operating_system))
+
+    elif backend == 'wxAgg':
+        figure_manager.frame.Maximize(True)
+
+    elif backend in ('Qt4Agg', 'Qt5Agg'):
+        figure_manager.window.showMaximized()
+
+    else:
+        import warnings
+        msg = "No window maximizing routine found for backend '" + backend + "' found."
+        warnings.warn(msg)
+
+
 if __name__ == '__main__':
     # create data
     scope = np.pi
@@ -87,3 +116,5 @@ if __name__ == '__main__':
     xn = np.linspace(0, 2 * np.pi, 360)
     yn = np.cos(xn) / 2 + 0.5
     plot_polar(yn, xn)
+
+    
