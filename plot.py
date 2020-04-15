@@ -46,6 +46,32 @@ def plot_polar(r, phi):
     plt.show()
 
 
+def multiple_images_one_colorbar():
+    w = 8
+    img_a = np.random.uniform(0, 1, (w, w))
+    img_b = np.random.uniform(0, .25, (w, w))
+    img_c = np.random.uniform(0, 2, (w, w))
+    img_d = np.random.uniform(.3, .7, (w, w))
+
+
+    def minmax(*arr: np.ndarray) -> (float, float):
+        """Collect min and max from several arrays. Minimal range is limited to 0..1."""
+        return np.amin([a.min() for a in arr] + [0.]), np.max([a.max() for a in arr] + [1.])
+
+
+    vmin, vmax = minmax(img_a, img_b, img_c)
+    print(vmin, vmax)
+
+    fig, axes = plt.subplots(2, 2)
+    for ax, img in zip(axes.flat, [img_a, img_b, img_c, img_d]):
+        # ax.set_axis_off()
+        img_handle = ax.imshow(img, cmap='gray', vmin=vmin, vmax=vmax)
+
+    cbar = fig.colorbar(img_handle, ax=axes.ravel().tolist())
+
+    plt.show()
+
+
 def cone(scope, samples):
     t_squared = np.linspace(-scope, scope, samples) ** 2
     line_2d = np.empty((samples, samples))
