@@ -1,6 +1,7 @@
-# from pkg import mod, utils
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import pkg
 
-# mod.module_function()
 pkg.utils.tool()
-# pkg.mod.module_function()
+pkg.mod.module_function()

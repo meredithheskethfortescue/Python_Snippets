@@ -1,2 +1,2 @@
 def tool():
-    print("tool called")
+    print("tool called\n")
