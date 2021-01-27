@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Example of a generator function and its class-equivalent"""
 
+
 def generator_fibonacci():
     """Generator providing the Fibonacci-Sequence"""
     a, b = 0, 1
@@ -22,6 +23,13 @@ class IteratorFibonacci:
 
     def __iter__(self):
         return self
+
+
+def generator_loop_over_array(array):
+    """Generator that loops over an array"""
+    while True:
+        for element in array:
+            yield element
 
 
 if __name__ == '__main__':
