@@ -1,0 +1,8 @@
+logging.basicConfig(filename='tst.log',
+                        format='%(asctime)s %(message)s',
+                        filemode='a')
+                        
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+
+log.debug("Hello, world!")
