@@ -1,3 +1,7 @@
+"""Basic logging to file"""
+import logging
+
+
 logging.basicConfig(filename='tst.log',
                         format='%(asctime)s %(message)s',
                         filemode='a')
