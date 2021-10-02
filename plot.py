@@ -113,6 +113,11 @@ def maximize_window():
         warnings.warn(msg)
 
 
+def minimal_colorbar():
+    """Minimal possibility of adding a colorbar to the current plot"""
+    plt.colorbar(cax=make_axes_locatable(plt.gca()).append_axes('right', size='5%', pad=0.1))
+
+
 if __name__ == '__main__':
     # create data
     scope = np.pi
