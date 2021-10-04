@@ -118,6 +118,17 @@ def minimal_colorbar():
     plt.colorbar(cax=make_axes_locatable(plt.gca()).append_axes('right', size='5%', pad=0.1))
 
 
+def purge_label_duplicates():
+    """purge duplicates in plot labels"""
+    handles, labels = plt.gca().get_legend_handles_labels()
+    new_labels, new_handles = [], []
+    for handle, label in zip(handles, labels):
+        if label not in new_labels:
+            new_labels.append(label)
+            new_handles.append(handle)
+    plt.legend(new_handles, new_labels)
+
+
 if __name__ == '__main__':
     # create data
     scope = np.pi
