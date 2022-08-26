@@ -129,7 +129,28 @@ def purge_label_duplicates():
             new_handles.append(handle)
     plt.legend(new_handles, new_labels)
 
+    
+def pretty_arrange(n: int) -> (int, int):
+    """get shape for pretty arranged sub figures
+    If able arrange sub figures in a squared shape that is large enough for the given number `n` of axes.
+    If not possible make it rectangular.
+    """
+    # todo: add new parameter `aspect_ratio: tuple=(1, 1)` as squared is not always perfect, e.g. squared images on a 16:9 screen
+    # squared shape is ideal
+    sqrt_float = np.sqrt(n)
+    sqrt_int = int(sqrt_float)
 
+    # if n is prime result is squared
+    if sqrt_float.is_integer():
+        return sqrt_int, sqrt_int
+    # add one column to the square
+    elif sqrt_int * (sqrt_int + 1) >= n:
+        return sqrt_int, (sqrt_int + 1)
+    # if one additional column does not suffice, add one column and one row
+    else:
+        return (sqrt_int + 1), (sqrt_int + 1)
+
+    
 if __name__ == '__main__':
     # create data
     scope = np.pi
