@@ -6,12 +6,16 @@ from typing import Callable
 
 
 def decohints(decorator: Callable) -> Callable:
-    """Decorator for decorators that preserves the correct type hints in the IDE"""
-    # for original code see https://github.com/gri-gus/decohints
+    """Decorator for decorators that preserves the correct type hints in the IDE
+    The type hint for a decorated function in an IDE usually gets `*args, **kwargs`.
+    Since this is no helpful information, `decohints` can be used on the decorator to preserve the type hints of the
+    decorated function/class.
+    For original code see https://github.com/gri-gus/decohints
+    """
     return decorator
 
 
-@decohints
+# @decohints
 def box(_func=None, symbol: str = "="):
     """Decorator to draw a bar above and below the standard output of a function"""
     assert len(symbol) > 0, KeyError("`symbol` value must contain a character")
@@ -82,3 +86,5 @@ if __name__ == '__main__':
 
     # a function call that does not print to stdout stays silent despite being decorated
     silent_function()
+
+    help(verbose_function)
