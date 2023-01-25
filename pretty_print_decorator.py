@@ -2,14 +2,22 @@
 from contextlib import redirect_stdout
 import functools
 import io
+from typing import Callable
 
 
+def decohints(decorator: Callable) -> Callable:
+    """Decorator for decorators that preserves the correct type hints in the IDE"""
+    # for original code see https://github.com/gri-gus/decohints
+    return decorator
+
+
+@decohints
 def box(_func=None, symbol: str = "="):
     """Decorator to draw a bar above and below the standard output of a function"""
     assert len(symbol) > 0, KeyError("`symbol` value must contain a character")
     assert len(symbol) == 1, NotImplementedError("Multiple symbols are not supportet yet!")
 
-    def decorator_box(func):
+    def _decorator_box(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             # catch stdout from wrapped function
@@ -36,14 +44,15 @@ def box(_func=None, symbol: str = "="):
         return wrapper
 
     if _func is None:
-        return decorator_box
+        return _decorator_box
     else:
-        return decorator_box(_func)
+        return _decorator_box(_func)
 
 
 if __name__ == '__main__':
     @box
     def verbose_function(world: str = "world"):
+        """Print some stuff to stdout"""
         print(f"Hello, {world}!")
         print()
         print("Lorem ipsum, dolor sit.")
