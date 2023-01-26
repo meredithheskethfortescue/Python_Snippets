@@ -15,7 +15,7 @@ def decohints(decorator: Callable) -> Callable:
     return decorator
 
 
-# @decohints
+@decohints
 def box(_func=None, symbol: str = "="):
     """Decorator to draw a bar above and below the standard output of a function"""
     assert len(symbol) > 0, KeyError("`symbol` value must contain a character")
@@ -87,4 +87,5 @@ if __name__ == '__main__':
     # a function call that does not print to stdout stays silent despite being decorated
     silent_function()
 
+    # let's see if the help function still get's the correct docstring
     help(verbose_function)
