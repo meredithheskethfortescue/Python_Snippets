@@ -15,3 +15,8 @@ dataset = {'alice': 0,
 path_out = "./dataset.json"
 with open(path_out, 'w') as f:
     json.dump(dataset, f, indent='\t', cls=NumpyArrayEncoder, sort_keys=True)
+
+# read *.json file
+with open(path_out, 'r') as f:
+    data = f.read()
+reloaded_json = json.loads(data)
