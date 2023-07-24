@@ -21,14 +21,17 @@ def memento(obj: object, deep: object = True):
 
 
 class Memento:
-    """Memento Design Pattern"""
+    """Memento Design Pattern Base Class
+    The current state of the object can be saved.
+    The `reset` function can restore that state.
+    """
     _state = None
 
     def save_current_state(self):
+        """"""
         # Create a memento of the current state
         self._state = memento(self, True)
 
     def reset(self):
-        # Reset the object to the saved state
-        # todo: support multiple states
+        """Reset all changes to the previously saved state"""
         self._state()
