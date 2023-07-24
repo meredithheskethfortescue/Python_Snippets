@@ -28,10 +28,14 @@ class Memento:
     _state = None
 
     def save_current_state(self):
-        """"""
+        """Save the current state
+        Use `reset()` to return to that state later.
+        """
         # Create a memento of the current state
         self._state = memento(self, True)
 
     def reset(self):
-        """Reset all changes to the previously saved state"""
+        """Reset all changes to the previously saved state
+        Use `save_current_state()` to save a state.
+        """
         self._state()
