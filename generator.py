@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Example of a generator function and its class-equivalent"""
+import matplotlib.pyplot as plt
 
 
 def generator_fibonacci():
@@ -30,6 +31,14 @@ def generator_loop_over_array(array):
     while True:
         for element in array:
             yield element
+
+
+def generator_colors():
+    """Generator that loops over the matplotlib color cycle"""
+    colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+    while True:
+        for color in colors:
+            yield color
 
 
 if __name__ == '__main__':
